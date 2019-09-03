@@ -1,0 +1,123 @@
+<html>
+
+<head>
+    <title>JAVASCRIPT HW3</title>
+</head>
+
+<body>
+    <script>
+        // ЗАДАНИЯ ДЛЯ РАЗМИНКИ!!!!!!)))
+
+        //1) Написать функцию которая принимает 2 параметра перемножает и возвращает значение!!!
+        function multiply(a, b) {
+            return a * b;
+        };
+        multiply(5, 10);
+        console.log("Task #1: " + multiply(5, 10));
+
+
+        // 2) Написать функцию которая принимает 3 параметра и возвращает найменьшее из них
+        function min(a, b, c) {
+            var result = (a < b && a < c) ? a : ( b < a && b < c) ? b : c;
+            return result;
+        }
+        console.log("Task #2 first variant: " + min(100, 33, 11));
+        // Другой вариант
+        function minMath(a, b, c) {
+            return Math.min(a, b ,c);
+        };
+        console.log("Task #2 second variant: " + minMath(3234, -234, 2));
+
+        //3) Написать функцию которая 
+        //  -принимает массив, 
+        //  -сохраняет непарные числа в новый массив, 
+        //  -сортирует массив
+        //  -и возвращает отсортированный массив
+        function sortOddNumbers(array) {
+            let newArr = [];
+            for (var i = 0; i < array.length; i++){
+                if(array[i]%2 === 1) newArr.push(array[i]);
+            };
+            return newArr.sort(function (a, b) {return a - b});
+        };
+        console.log("Task #3: " + sortOddNumbers([2, 5, 3, 6, 9, 8, 10, 11]))
+
+        // 4) Написать функцию котороя принимает массив, и выводит новый массив из тех элементов которые кратны 5!!
+        function multipleOfFive(array) {
+            let newFifthArray = [];
+            for (var i = 0; i < array.length; i++) {
+                if(array[i]%5 === 0) newFifthArray.push(array[i]);
+            };
+            return newFifthArray;
+        };
+        console.log( "Task #4: " + multipleOfFive([20, 5, 3, 23, 15, 8, 10, 11]));
+
+
+        // 5) Написать функцию котороя принимает массив из строк, и возвращает конкатенацию из элементов первые символы которых
+        // совпадают с этой подстрокой 'jitb'. Используем  toLowerCase() и indexOf() методы  !!
+        function matchWithString(array) {
+            const str = 'jitb';
+            let temp = array.join(',').toLowerCase().split(',');
+            let result = '';
+            for(var i = 0; i < str.length; i++){
+                for( var j = 0; j < array.length; j++){
+                    if(temp[j][0].indexOf(str[i]) !== -1) result += ' ' + temp[j];
+                };
+            };
+            return result;
+        }
+        console.log( "Task #5: " + matchWithString(['Javascript', 'nice', 'coding', 'is', 'the', 'language', 'Best', 'worst'])); // должно вывести javascript is the best
+
+        function matchWithString(array) {
+            const str = 'jitb';
+            let newArray = array.join(' ').toLowerCase().split(' ');
+            let newStr = [];
+            for (let i = 0; i < newArray.length; i++) {
+                if (str.indexOf(newArray[i][0]) !== -1) {
+                    newStr.push(newArray[i]);
+                }
+            }
+            return newStr.join(' ');
+        }
+
+        // 6) Написать функцию котороя принимает строку и возвращает подстроку и количество таких подстрок в строке! 
+        function  sameSubstring(str) {
+            let result = [str[0]];
+            for(var i = 0; i < str.length - 1; i++){
+                if (result[0].indexOf(str[i+1]) === -1 ) {
+                    result[0] += str[i+1];
+                };
+            };
+            result[1] = str.split(result[0]).length - 1;
+            return result;
+        };
+        console.log( "Task #6.1: " + sameSubstring('fdfdfdfd')); // рузльтат массив из ['fd', 4]
+        console.log( "Task #6.2: " + sameSubstring('xxxxxx')); // рузльтат массив из ['x', 6]
+        console.log( "Task #6.3: " + sameSubstring('xyzxyzxyz')); // рузльтат массив из ['xyz', 3]
+
+        // 7) Написать функцию которая перемножает числа от 5 до 10 через рекурсию!!!
+        function recursive(number) {
+            if (number === 10) {
+                return 10
+            } else {
+                return number * recursive(number + 1);
+            };
+        };
+        console.log( "Task #7: " + recursive(5));
+
+        // 8) Написать функцию котороя принимает число и проверяет простое ли число, если да то возвращает true иначе false!!
+        function isPrime(num) {
+            for(var i = 2; i < num; i++){
+                if(num%i === 0) {
+                    return false
+                };
+            };
+            return true;
+        };
+        console.log( "Task #8.1: " + isPrime(7)); // true
+        console.log( "Task #8.2: " + isPrime(6)); // false
+        console.log( "Task #8.3: " + isPrime(9)); // false
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,161 @@
+<html>
+<head>
+    <title>JAVASCRIPT</title>
+</head>
+<body>
+    <script>
+        // Добраться до числа 43 и также добраться до 109
+        const first = [ 4, [ 5, 4, 6, [ 5, 1, 109, 3, [ 2, 10, 43, 22, 32 ] ] ] ];
+        console.log('answer to task number 1: ' + first[1][3][4][2] + ';' + first[1][3][2]);
+
+         // Пробежаться через цикл for и если значение меньше 5 то перезаписать его на значение 11 
+         // то есть результат должен быть [ 11, 10, 17, 11, 11 , 11 , 11 ];
+        const zero = [ 4, 10, 17, 2, 3, 1, 0 ];
+        for (var i = 0; i < zero.length; i++) {
+            (zero[i] < 5 ) ? zero[i] = 11 : zero[i] = zero[i];
+        };
+        console.log('answer to task number 2: ' + zero);
+
+        // Пробежаться через цикл for и четные елементы перемножить и записать результат в odd и вывести
+        // то есть перемножить в цикле 4 17 3 10 
+         const multiply = [ 4, 10, 17, 2, 3, 1, 10 ];
+         let odd = 1;
+         for (var i = 0; i < zero.length; i++) {
+             (i % 2 == 0) ? odd *= multiply[i] : odd = odd;
+         }
+         console.log('answer to task number 3: ' + odd);
+
+        // Вывести только нечетные числа используя цикл: 
+        // - for,
+        // - while 
+        const second = [ 1, 5, 10, 4, 2, 3 ];
+        for (var i = 0; i < zero.length - 1; i++) {
+            if (second[i] % 2 !== 0) {
+                console.log('answer to task number 4 with "for": ' + second[i]);
+            };
+        };
+        var i = 0;
+        while(i < second.length) {
+            if (second[i] % 2 !== 0){
+                console.log('answer to task number 4 with "while": ' + second[i]);
+            };
+            ++i;
+        };
+
+        // Найти минимальное значение и вывести
+        const third = [ 10, 2, 4, 43, 5, 3, 19, 23 ];
+        let minNumb = third[0];
+        for (var i = 0; i < third.length - 1; i++) {
+            if (minNumb > third[i]) {
+                minNumb = third[i];
+            };
+        };
+        console.log('answer to task number 5: ' + minNumb);
+        
+        // Вывести все елементы в цикле for в обратном порядке то есть 28 19 14 9 23 43 3 4
+        const fourth = [ 4, 3, 43, 23, 9, 14, 19, 28 ];
+        let backwardsFourth = [];
+        for (var i = fourth.length - 1, y = 0; i >= 0; i--) {
+            backwardsFourth[y] = fourth[i];
+            y++;
+        }
+        console.log('answer to task number 6: ' + backwardsFourth);
+
+        // Найти произведение  всех елементов
+        const fifth = [ 9, 14, 19, 28 ];
+        let derivetives = 1;
+        for (var i = 0; i < fifth.length; i++) {
+            derivetives *= fifth[i];
+        };
+        console.log('answer to task number 7: ' + derivetives);
+
+        // Пройтись через цикл for и сложить все числа в массиве и вывести результат!
+        const sixth = [ 9, 4, 19, 18 ];
+        let sum = 0;
+        for (var i = 0; i < sixth.length; i++) {
+            sum += sixth[i];
+        };
+        console.log('answer to task number 8: ' + sum);
+        
+        // Пройтись через цикл for и найти среднее арифметическое всех елементов
+        // среднее арифметическое - это сумма всех елементов, разделенная на их количество!
+        const seventh = [ 2, 0, 3, 29, 23, 19 ];
+        let average = 0;
+        for (var i = 0; i < seventh.length; i++) {
+            average += seventh[i];
+            if (i === seventh.length - 1) {
+                console.log('answer to task number 9: ' + average / seventh.length);
+            }
+        };
+        // Записать в массив eighth числа от 5 до 17 через цикл:
+        // - for,
+        // - while 
+        const eighth = [];
+        for (var i = 5, y = 0; i <=17; i++) {
+            eighth[y] = i;
+            y++
+        }
+        console.log('answer to task number 10 with "for": ' + eighth);
+        let eighthWhile = [], x = 5, h = 0;
+        while( x <= 17){
+            eighthWhile[h] = x;
+            h++;
+            x++;
+        };
+        console.log('answer to task number 10 with "while": ' + eighthWhile);
+
+        // ADVANCED ЗАДАНИЯ!!!! ТО ЕСТЬ НЕОБЯЗАТЕЛЬНЫЕ!!!!!!!!
+
+        // Отсортировать массив по возростанию! и вывести
+        const arr = [ 1, 2, 18, 3, 38, 41, 0 ];
+        let temp;
+        for (var i = 0; i < arr.length - 1; i++) {
+            for (var j = 0; j < arr.length - i - 1; j++) {
+                if(arr[j] > arr[j +1]){
+                    temp = arr[j +1]; // заносим большее значение в временную переменную
+                    arr[j +1] = arr[j]; //элементы массива меняются местами
+                    arr[j] = temp; // присваеваем меньшее значение в временную переменную
+                }
+            }
+        }
+        console.log('answer to task number 11: ' + arr);
+
+
+        // Есть строкa в переменной tenth!! Нужно пройтись циклом for и записать в переменную res строку со значением 2a1f3c1b
+        // так как если обратить внимание то в строке 'aafcccb' символ а идет последовательно 2 раза далее f только один символ, символ с последовательно 3 раза
+        // и символ b один раз
+        const str = 'aafcccb';
+        let res = '';
+        let count = 1;
+        for(let i = 0; i < str.length; i++){
+            if (str[i] === str[i+1]) {
+                count++;
+            } else {
+                res += count + str[i];
+                count = 1;
+            }
+        };
+        console.log('answer to task number 12: ' + res);
+
+
+        // ЗДЕСЬ ЕЩЕ ТЯЖЕЛЕЙ нужно подсчитать количество одинаковых символов в строке и при этом одинаковые символы не идут последовательно!!
+        // то есть результат должен быть 4a3f4c
+        const eleventh = 'aafcccffbaac';
+        let newRes = '', countSecond = 0;
+        for(let i = 0; i < eleventh.length; i++){
+            if (newRes.indexOf(str[i] !== -1)) {
+                continue
+            };
+            for (var j = i + 1; j < eleventh.length; j++) {
+                if (eleventh[i] === eleventh[j]) {
+                    countSecond++;
+                }
+            }
+            newRes += countSecond+eleventh[i];
+            countSecond = 1;
+        };
+        console.log('answer to task number 13: ' + newRes);
+
+    </script>
+</body>
+</html>

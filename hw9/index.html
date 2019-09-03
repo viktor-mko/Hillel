@@ -1,0 +1,128 @@
+<html>
+
+<head>
+    <title>JAVASCRIPT HW3</title>
+</head>
+
+<body>
+    <script>
+        // ЗАДАНИЯ ДЛЯ РАЗМИНКИ!!!!!!)))
+
+        //1) Есть массив из обьектов нужно отфильтровать только те у которых цена больше 40000 и где model не равна Mercedes с помощью filter!
+        const car = [
+            {
+                model: 'BMW',
+                price: 45000,
+                year: 2015,
+                country: 'Germany'
+            },
+            {
+                model: 'Audi',
+                price: 75000,
+                year: 2017,
+                country: 'Germany'
+            },
+            {
+                model: 'Mercedes',
+                price: 80000,
+                year: 2019,
+                country: 'Germany'
+            },
+            {
+                model: 'Volkswagen',
+                price: 35000,
+                year: 2019,
+                country: 'Germany'
+            },
+        ];
+
+        console.log(car.filter(element => (element.price > 40000 && element.model !== 'Mercedes')));
+
+        // 2) Есть массив claims если хотя бы один обьект имеет в поле статус значение Open то вернуть true! Ипользовать метод массива some!
+        claims = [
+            {
+                id: 1234,
+                model: 'MC7',
+                status: 'Open'
+            },
+            {
+                id: 3453,
+                model: 'MC7',
+                status: 'Open'
+            },
+            {
+                id: 6343,
+                model: 'Gran Tour',
+                status: 'Closed'
+            },
+            {
+                id: 7644,
+                status: 'In Progress'
+            },
+            {
+                id: 7686,
+                model: 'City Bike',
+                status: 'Closed'
+            },
+            {
+                id: 8356,
+                model: 'Bike',
+                status: 'Closed'
+            },
+            {
+                id: 9745,
+                model: 'Bicycle',
+                status: 'Closed'
+            },
+            {
+                id: 10253,
+                model: 'Bicycle',
+                status: 'Closed'
+            },
+            {
+                id: 14234,
+                model: 'Bike',
+                status: 'Closed'
+            }
+        ];
+
+        console.log(claims.some(element => element.status === 'Open'));
+
+        //3) Дан массив arr! Используя пробежаться по массиву и если все больше или равны 2 то вернуть true! Использовть every метод!
+        const arr = [10, 6, 3, 5, 6, 2, 12, 64];
+
+        console.log(arr.every(element => element >= 2));
+
+        // 4) Используя claims переменную выше!! Удилить все элементы у которых статус isClosed!! Подсказка! удалить не значит брать и явно удалять можно использовать метод массивов и вернуть новый и перезаписать!!
+
+        const newClaims = claims.filter( value => value.status !== "Closed");
+
+        console.log(newClaims);
+
+        // 5) Написать свой собственный filter! Функция должна принимать два параметра массив и функцию!!
+        function filter(array, f) {
+            let newArray = [];
+            // your code
+            for ( let current = 0; current < array.length; current++) {
+                if (f(array[current])) {
+                    newArray = [...newArray, array[current]];
+                }
+            }
+            return newArray;
+        }
+        console.log(filter([5, 2, 5, 1, 6, 3, 6], function (el) { return el > 2 }));
+
+        // ВОТ ПРИМЕР КАК НАПИСАТЬ СВОЙ map
+        function map(arr, f) { // arr - массив, f - функция обратного вызова
+            let newArr = [];
+            for (let current of arr) {
+                newArr = [...newArr, f(current)];
+            }
+            return newArr;
+        }
+
+        map([5, 3, 1, 5, 3], function (curr) { return curr * 2 }); // передал два параметра массив и коллбэк
+    </script>
+</body>
+
+</html>

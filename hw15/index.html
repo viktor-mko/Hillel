@@ -1,0 +1,135 @@
+<html>
+
+<head>
+    <title>JAVASCRIPT</title>
+</head>
+
+<body>
+    <script>
+        // ЗАДАНИЯ ДЛЯ РАЗМИНКИ!!!!!!)))
+
+
+        //1) Есть функция, которая может принять неограниченное количество аргументов'-', '65', 'a', 'p', реализуйте ее так, что бы она находила дефиз и возвращала '65-a-p'
+        function getString(...arr) {
+            let result = arr.filter(element => element != '-').join('-');
+            return result;
+        }
+        getString('-', '65', 'a', 'p'); // 65-a-p
+        getString('75', '-', 'ad', 'hg', '543'); // 75-ad-hg-543
+
+        //2)  Перехватит ли catch здесь ошибку
+        new Promise((resolve, reject) => {
+        resolve('dffsd')
+        }).then((vasia) => {
+            var df= dfdf; //  ошибка вот она синтаксическая!
+            return 3423;
+        })
+        .catch((e)=> console.log('fdsfd', e));
+
+        // да, в момент создания переменной возникает синтаксическая ошибка, соответственно до return дело не доходит и ошибка попадает в catch
+
+         // или здесь
+        new Promise((resolve, reject) => {
+            resolve('dffsd')
+        }).then((vasia) => {
+            throw new Error('new errror'); // вот явно бросаем ошибку
+            return 3423;
+        })
+        .catch((e)=> console.log('fdsfd', e));
+
+         // да. Тут мы явно возвращаем ошибку с помощью throw new Error, она и попадает в catch
+
+        // 3) Взял с проекта код!! Нужно всего лишь переписать на async await :) Запускать не нужно ибо не сработает), просто переписать а я посмотрю!
+        let uploadedImage ='_.jpg';
+
+        async function pickImage() {
+            let context = imagepicker.create({
+                mode: 'single'
+            });
+            let authorize = await context.authorize();
+            if (authorize) {
+                let selection = await context.present();
+                selection.forEach((selected) => {
+                    uploadedImage = selected;
+                    await cropImage();
+                });
+            }
+        };
+
+        /**
+         * Takes camera photo
+         */
+        async function takePhoto() {
+            let permission = await camera.requestPermissions();
+            if (permission) {
+                let imageAsset = await camera.takePicture();
+            }
+            uploadedImage = imageAsset;
+            await cropImage();
+        };
+
+        /**
+         * Crops picture
+         */
+        async function cropImage() {
+            let source = new imageSource.ImageSource();
+            let newSource = await source.fromAsset(this.uploadedImage);
+            let args = await this.imageCropper.show(newSource, cropOptions);
+            if (args.image !== null) {
+                savePictureToFile(args.image);
+            }
+        };
+
+        /**
+         * Save picture
+         */
+        function savePictureToFile(image) {
+            const folder = fs.knownFolders.documents();
+            const path = fs.path.join(folder.path, "Temp" + Date.now() + ".png");
+            const saved = image.saveToFile(path, "png");
+            if (saved) {
+                this.currentImage = image;
+                this.pictureSelected.emit(path);
+            }
+        }
+
+        async function cropOptions() {
+            return isAndroid ? {
+                width: 512,
+                height: 512
+            } : {
+                lockSquare: true
+            };
+        }
+
+        pickImage()
+
+        // // 4) И закрепляем промисы
+        // https://playwithpromise.herokuapp.com/api/order-review/last -
+        let prom = new Promise ((res, rej) => {
+            setTimeout(() => {
+            // вернуть строку  через 3 секунды и только тогда сделать запрос по этой строке!
+            res('https://playwithpromise.herokuapp.com/api/order-review/last')}, 3000);
+        });
+
+        prom.then((date) => {
+            var Req = new XMLHttpRequest();
+        Req.onload = function () {
+            if (!this.responseText) rej('BYE');
+            console.log(JSON.parse(this.responseText));
+        }
+        Req.open("GET", date);
+        Req.send();
+        });
+
+         // 5) Ну и последнее так уже чтобы расслабиться)! Пишем свой собственный push!!
+         function push(array, value) {
+             array[array.length] = value;
+             return array;
+         }
+        push([1,2,3], 4); //вернет [1,2,3,4]
+
+    </script>
+</body>
+
+</html>

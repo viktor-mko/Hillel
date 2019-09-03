@@ -1,0 +1,91 @@
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <script>
+        // удалить из строки повторяющиеся символы
+        var first = '1234156117181119999';
+        // делал функцией для универсальности и для тренировки, понимаю что можно без нее и будет меньше строк
+        function noDuplicateCharacters(str) {
+            let result = [str.split('')[0]];
+            for (var i = 1; i < first.length; i++){
+                if(result[result.length - 1] !== str[i]){
+                    result.push(str[i]);
+                };
+            };
+            return result;
+        }
+        console.log("Task #1: " + noDuplicateCharacters(first));
+
+        // количество слов в строке
+        var second = 'Hi, i am learning javascript';
+        console.log("Task #2: " + second.replace(/,/, '').split(' ').length);
+
+        // самое длинное слово в строке
+        var third = 'Hi, i am learning javascript';
+        let wordWithMaxLength = third.replace(/,/, '')
+                                    .split(' ')
+                                    .sort((a,b) => a - b);
+        console.log("Task #3: " + wordWithMaxLength[wordWithMaxLength.length - 1]);
+
+
+        // удалить пробелы в строке
+        var fourth = 'Hi, i am learning javascript';
+        // Вариант с регуляркой
+        console.log("Task #4.1: " + fourth.replace(/\s/g, ''));
+        // Вариант с циклом
+        let resultWithoutSpace = '';
+        for (var i = 0; i < fourth.length; i++){
+            if (fourth[i] !== ' '){
+                resultWithoutSpace += fourth[i];
+            }
+        }
+        console.log("Task #4.2: " + resultWithoutSpace);
+
+        // заменить пробелы на зяпятые
+        var fifth = 'Hi, i am learning javascript';
+        // Вариант с регуляркой
+        console.log("Task #5.1: " + fifth.replace(/\s/g, ','));
+        // Вариант с циклом
+        let resultWithComma = '';
+        for (var i = 0; i < fifth.length; i++){
+            if (fifth[i] === ' '){
+                resultWithComma += ',';
+            } else {
+                resultWithComma += fifth[i];
+            }
+        }
+        console.log("Task #5.2: " + resultWithComma);
+
+        // Отфильтровать массив таким образом чтобы числа были не меньше 20 используя фильтр!
+        var sixth = [3, 42, 234, 5, 3, 21, 53];
+        console.log("Task #6: " + sixth.filter(function (value) {
+            return value > 20;
+        }));
+
+        // Вернуть новый массив из строк добавив слово месяц к элементу если число больше 20 используя map
+        // [3, '42 месяца', '23 месяца', 5, 3, '21 месяца', '53 месяца']
+        var seventh = [3, 42, 23, 5, 3, 21, 53];
+        console.log("Task #7: " + seventh.map(function (value) {
+            if(value > 20) {
+                return value + " month";
+            }
+            return value;
+        }));
+
+        // используя reduce просуммировать элементы которые больше 3
+        var eight = [3, 42, 23, 5, 3, 21, 53];
+        console.log("Task #8: " + eight.reduce(function(sum, current) {
+            if (current <= 3) {
+                return sum + 0;
+            }
+            return sum + current;
+        },0));
+
+    </script>
+</body>
+
+</html>

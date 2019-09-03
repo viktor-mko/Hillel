@@ -1,0 +1,74 @@
+<html>
+
+<head>
+    <title>JAVASCRIPT</title>
+</head>
+
+<body>
+    <script>
+        // ЗАДАНИЯ ДЛЯ РАЗМИНКИ!!!!!!)))
+
+
+        //1) Есть код ! с помощью async await реализуем правильную последовательность!!
+        // setTimeout(()=> console.log('1'), 1300);
+        // console.log('2')
+        // console.log('3')
+        // setTimeout(()=> console.log('4'), 300);
+        // console.log('5')
+
+        async function rightOrder () {
+            await new Promise ((res, rej) => {
+                setTimeout(() => {
+                    console.log('1'), 1300;
+                    res();
+                });
+            });
+            console.log('2');
+            console.log('3');
+            await new Promise ((res, rej) => {
+                setTimeout(() => {
+                    console.log('4'), 300;
+                    res();
+                });
+            });
+            console.log('5');
+        };
+
+        rightOrder();
+
+
+        // 2) Есть роуты!! Делаем через async await то что в предыдущей!
+        // https://playwithpromise.herokuapp.com/api/order-review/last - вернет обьект с id такой( 5d4762e02481a600174fb1ae )
+        // после чего используя id делаем другой запрос
+        // https://playwithpromise.herokuapp.com/api/order-review/getid/{id} 
+        // https://playwithpromise.herokuapp.com/api/order-system/product/{productId}
+
+
+        function httpRequest (path) {
+            return new Promise((res, rej) => {
+                var Req = new XMLHttpRequest();
+                Req.onload = function () {
+                    if (!this.responseText) rej('BYE');
+                    res(JSON.parse(this.responseText));
+                }
+                Req.open("GET", path);
+                Req.send();
+            });
+        }
+
+        async function newObj () {
+            let firstStap = await httpRequest('https://playwithpromise.herokuapp.com/api/order-review/last');
+            let secondStap = await httpRequest(`https://playwithpromise.herokuapp.com/api/order-review/getid/${firstStap._id}`);
+            let thirdStap = await httpRequest(`https://playwithpromise.herokuapp.com/api/order-system/product/${secondStap.orderList[0].productId}`);;
+            let fourthStap = await httpRequest(`https://playwithpromise.herokuapp.com/api/order-system/product/${secondStap.orderList[1].productId}`);;
+            let result = [ thirdStap, fourthStap ];
+            console.log(result);
+            return result;
+        };
+
+        newObj();
+        
+    </script>
+</body>
+
+</html>

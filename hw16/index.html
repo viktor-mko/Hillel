@@ -1,0 +1,126 @@
+<html>
+
+<head>
+    <title>JAVASCRIPT</title>
+</head>
+
+<body>
+    <script>
+        // ЗАДАНИЯ ДЛЯ РАЗМИНКИ!!!!!!)))
+
+
+        //1) Есть три обьекта организовать цепочку таким образом чтобы обьект obj1 был родилем obj2, obj2 родителем obj3
+        const obj1 = {
+            name: 'Sergei',
+            lastName: 'Shakhov'
+        };
+
+        const obj2 = {
+            name: 'Vasia',
+            lastName: 'Petrov'
+        };
+
+        const obj3 = {
+            name: 'Misha',
+            lastName: 'Ivanov'
+        };
+        obj2.__proto__ = obj1;
+        obj3.__proto__ = obj2;
+
+
+
+        // 2) Ну еще одна тренировочка  
+        //  https://playwithpromise.herokuapp.com/api/order-review - POST запрос на отправление данных
+        // `https://playwithpromise.herokuapp.com/api/order-review/removeByEmail?email=${agentName}` - DELETE запрос на удаление этой записи!
+        //  agentName - брать значение со свойства agentName в обьекте order!
+        // Есть две переменные нужно добавить в обьект order свойство orderList 
+        // после этого сделать POST запрос который отправит этот обьект! И после этого DELETE запрос
+        // Сделать с помощью then и async await!
+        // НЕ ЗНАЕТЕ КАК СДЕЛАТЬ POST, DELETE запросы ? ТОЖЕ САМОЕ ЧТО И С GET, только нужно немного пеменять и добавить кое-что !
+        //  Ставим вас в боевую обстановку нужно загуглить как, если не получиться тогда я подскажу!
+        let order = {
+            creationDate: "2019-04-07T19:14:55.964Z",
+            agentName: "mko.viktor@gmail.com",// здесь введите лучше какой-то другой эмеил!
+            orderId: 10
+        };
+        const orderList = [
+            {
+                quantity: 2,
+                productId: "5d4750f21c9d440000511775"
+            },
+            {
+                quantity: 2,
+                productId: "5d47551f1c9d440000511779"
+            }
+        ];
+        order = {
+            ...order,
+            orderList
+        }
+        let agentName = order.agentName;
+
+
+        function http( method, path, data) {
+            var Req = new XMLHttpRequest();
+            Req.open(method, path);
+            if(method !== 'POST') {
+                Req.onload = function () {
+                    if (!this.responseText) rej('BYE');
+                    res(JSON.parse(this.responseText));
+                }
+                Req.send();
+            } else {
+                Req.send(data);
+            }
+        }
+        var pr1 = new Promise( (res,rej) => {
+            http('POST', `https://playwithpromise.herokuapp.com/api/order-review`, order )
+        res(order);
+        });
+
+        pr1.then(res => {
+            return new Promise((res,rej) => {
+                http('DELETE', `https://playwithpromise.herokuapp.com/api/order-review/removeByEmail?email=${agentName}`)
+            });
+        });
+
+        async function pr2() {
+            await http('POST', `https://playwithpromise.herokuapp.com/api/order-review`, order );
+            await http('DELETE', `https://playwithpromise.herokuapp.com/api/order-review/removeByEmail?email=${agentName}`);
+        }
+
+        pr2();
+
+
+
+
+        // 3) Ну и последнее как всегда! теперь пишем свой splice
+
+        // сделал частичную реализацию, а именно получение массива, удаление нужного
+        // количества элементов с нужной позиции и возможность поместить новые элементы
+
+        let arr = ['one', 'two', 1 , 2, [1, 2, 3], 3, 4, 5, 6];
+
+        function splice(array, position, deleteCount, ...elem) {
+            // ваш код
+            let arr1 = [], arr2 = [];
+            for(let i = 0; i < position; i++ ){
+                arr1.push(arr[i]);
+            }
+            for(let i = position + deleteCount; i < arr.length; i++ ){
+                arr2.push(arr[i]);
+            }
+            let result = [
+                ...arr1,
+                ...elem,
+                ...arr2
+            ];
+            return result;
+        }
+        splice(arr, 2, 1, [111, 4444], 'one', 333333);
+
+
+    </script>
+</body>
+
+</html>
