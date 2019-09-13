@@ -20,25 +20,81 @@
 
         first.prototype = second;
         
-        //2) Создать класс функция конструктор которого принимает два параметра position, salary, 
+        //2) Создать класс, функция конструктор которого, принимает два параметра position, salary,
         // также создать одно private поле positions = ['software developer', 'hr manager', 'project manager'], getter(get функция)!
         // которая смотрит на поле positions, и если в position есть одно из перечисленных то возвращает true иначе false
-    
 
-        //3) Есть класс App! Добавить две функции одна из них устанавливает product(создает поле product
+        class NewClass {
+            constructor(position, salary){
+                this.position = position;
+                this.salary = salary
+            }
+            #positions = ['software developer', 'hr manager', 'project manager'];
+            get getter() {
+                if (this.#positions.indexOf(this.position) >= 0){
+                    return true;
+                }
+                return false;
+            }
+        };
+
+        //3) Есть класс App! Добавить две функции одна из них устанавливает product(создает  поле product
         // обьект с полем name, price), вторая функция получает price
         // и одно статическое свойство yearOfIssue
+
+
+        // Не уверен что правильно понял задание
+
+
         class App {
             constructor() {
             };
-        }
+            static yearOfIssue = 2019;
+            createPtodyct (){
+                return {
+                    product : {
+                        name: "Vasya",
+                        price: 200
+                    }
+                }
+            }
+            getPrice (){
+                console.log(App.yearOfIssue, this.createPtodyct().product.price);
+            }
+        };
+        var x = new App;
        
         // 4) Пишем свой split и join))!
-        function split() {
-            // your code
+        function split(string, separator) {
+            // your
+            let startPoint = 0;
+            let result = [];
+            if (separator){
+                for(let i = 0; string.indexOf(separator, startPoint) >= 0; i++) {
+                    result[i] = [];
+                    let y = 0;
+                    let nextPoint = startPoint;
+                    for( nextPoint; nextPoint < string.indexOf(separator, startPoint); nextPoint++){
+                        result[i][y] = string[nextPoint];
+                        y++;
+                    }
+                    if ( string.indexOf(separator, string.indexOf(separator, startPoint))){
+                        startPoint = string.indexOf(separator, string.indexOf(separator, startPoint)) +1 ;
+                    };
+                }
+                result = result.map(elem => elem.join(''));
+            } else {
+                for (let i = 0; i < string.length; i++) {
+                    result[i] = string[i];
+                }
+            }
+            return result;
         }
-        function join() {
-            // your code
+
+        function join(arr, separator) {
+            // your
+            let result = arr.reduce((prevElement, elem ) => prevElement = `${prevElement}${elem}${separator}`);
+            return result;
         }
         // 5) Ну и на последок перепишем класс в вид самовыз функция которая возвращает функцию-конструктор
         class NewApp {
@@ -50,6 +106,15 @@
             }
         }
 
+        let NewApp = (function(){
+            function NewApp(object) {
+                this.object = object;
+            }
+            NewApp.prototype.getObject = function getObject () {
+                return object;
+            }
+            return NewApp;
+        })();
         
     </script>
 </body>
