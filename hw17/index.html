@@ -15,10 +15,11 @@
         function B(lastName) {
             this.lastName = lastName;
         }
+        A.prototype = new B('Shakhov');
+
         const first = new A('Sergei');
         const second = new B('Shakhov');
 
-        first.prototype = second;
         
         //2) Создать класс, функция конструктор которого, принимает два параметра position, salary,
         // также создать одно private поле positions = ['software developer', 'hr manager', 'project manager'], getter(get функция)!
