@@ -40,11 +40,13 @@ export class AppComponent implements ISchool{
     ]
   }
 
-  minID(obj: Array<ICourses>): {id: number, courseName: string, price: number} {
+  minID(obj: Array<ICourses>): ICourses {
       return obj.reduce(function (p, v) {
         return ( p.id < v.id ? p : v );
       });
   }
+
+  id = minID(this.school.courses);
 
   getSchoolName(): string {
     return this.school.name;
@@ -55,7 +57,8 @@ export class AppComponent implements ISchool{
 
 }
 
-function getFuctorial (val: number): number {
+function getFuctorial (val: number | string): number {
+  val = +val;
   return (val != 1) ? val * getFuctorial(val - 1) : 1;
 }
 
